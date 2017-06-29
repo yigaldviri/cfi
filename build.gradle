@@ -1,0 +1,50 @@
+group 'rivi'
+version '1.0'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        dependencies {
+            classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE")
+        }
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+apply plugin: 'idea'
+
+jar {
+    baseName = 'cfi'
+}
+
+sourceCompatibility = 1.8
+
+
+
+springBoot {
+    mainClass = "com.rivi.Application"
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'javax.inject', name: 'javax.inject', version:'1'
+    compile (group: 'org.springframework.boot', name: 'spring-boot-starter', version: '1.4.0.RELEASE'){
+        exclude module : 'spring-boot-starter-logging'
+    }
+    compile (group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.4.0.RELEASE'){
+        exclude module : 'spring-boot-starter-logging'
+    }
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.0.pr2'
+    compile (group: 'io.fabric8', name: 'kubernetes-client', version: '2.2.7') {
+        exclude group: 'com.fasterxml.jackson.core', module: 'jackson-core'
+    }
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.20'
+    compile group: 'commons-logging', name: 'commons-logging', version: '1.1.1'
+
+}
